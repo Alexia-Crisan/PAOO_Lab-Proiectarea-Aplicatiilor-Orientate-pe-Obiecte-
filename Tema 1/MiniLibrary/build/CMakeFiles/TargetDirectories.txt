@@ -1,0 +1,3 @@
+C:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema 1/MiniLibrary/build/CMakeFiles/MiniLibrary.dir
+C:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema 1/MiniLibrary/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema 1/MiniLibrary/build/CMakeFiles/ZERO_CHECK.dir
