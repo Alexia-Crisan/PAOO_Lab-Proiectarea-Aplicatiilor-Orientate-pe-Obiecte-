@@ -1,0 +1,10 @@
+^C:\USERS\ALEXX\ONEDRIVE\DESKTOP\FOLDERE\AC_CTI\ANUL 4\SEMESTRUL 1\PAOO\TEMA2\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema2" "-BC:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema2/build" --check-stamp-file "C:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema2/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
