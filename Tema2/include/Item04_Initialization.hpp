@@ -2,46 +2,50 @@
 #include <iostream>
 #include <string>
 
+// ===========================================================
 // Item 4: Make sure that objects are initialized before they're used.
+// ===========================================================
 
+class Noisy
+{
+    std::string text;
+
+public:
+    Noisy() : text("(gol)") { std::cout << "      Noisy: constructor implicit\n"; }
+    explicit Noisy(const std::string &t) : text(t) { std::cout << "      Noisy: constructor cu valoare\n"; }
+    Noisy(const Noisy &other) : text(other.text) { std::cout << "      Noisy: copy constructor\n"; }
+
+    Noisy &operator=(const Noisy &rhs)
+    {
+        text = rhs.text;
+        std::cout << "      Noisy: operator= (atribuire)\n";
+        return *this;
+    }
+};
+
+// STIL GRESIT: atribuire in corpul constructorului
 class UninitializedExample
 {
-    std::string name;
+    Noisy name;
     int value;
 
 public:
-    UninitializedExample(const std::string &n, int v)
+    UninitializedExample(const Noisy &n, int v)
     {
         name = n;
         value = v;
     }
 };
 
+// STIL CORECT: lista de initializare. Fiecare membru e construit direct cu valoarea finala
 class ProperlyInitializedExample
 {
-    std::string name;
+    Noisy name;
     int value;
 
 public:
-    ProperlyInitializedExample(const std::string &n, int v)
+    ProperlyInitializedExample(const Noisy &n, int v)
         : name(n), value(v) {}
 
-    void print() const
-    {
-        std::cout << "[Item 4] Name: " << name << ", Value: " << value << "\n";
-    }
+    int getValue() const { return value; }
 };
-
-// Solving non-local static initialization order fiasco across translation units:
-// Wrap non-local static objects inside functions (Meyers' Singleton pattern).
-class FileSystem
-{
-public:
-    void log() const { std::cout << "[Item 4] FileSystem accessed safely.\n"; }
-};
-
-inline FileSystem &tfs()
-{
-    static FileSystem fs;
-    return fs;
-}

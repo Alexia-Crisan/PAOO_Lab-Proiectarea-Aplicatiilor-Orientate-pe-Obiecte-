@@ -1,96 +1,83 @@
 #pragma once
 #include <iostream>
+#include <string>
 
-// Item 10: Have assignment operators return a reference to *this.
-// Item 11: Handle assignment to self in operator=.
-
-class Widget
+class Book
 {
 private:
-    int *data;
-    int priority;
+    std::string *title; // alocat cu new
+    int year;
 
 public:
-    explicit Widget(int val = 0, int prio = 0)
-        : data(new int(val)), priority(prio) {}
+    Book(const std::string &t = "Necunoscut", int y = 0)
+        : title(new std::string(t)), year(y) {}
 
-    ~Widget() { delete data; }
-
-    Widget(const Widget &rhs)
-        : data(new int(*rhs.data)), priority(rhs.priority) {}
-
-    Widget &operator=(const Widget &rhs)
+    Book(const Book &other)
+        : title(new std::string(*other.title)), year(other.year)
     {
+        std::cout << "   [Book] copy constructor\n";
+    }
+
+    ~Book()
+    {
+        std::cout << "   [Book] destructor: " << *title << "\n";
+        delete title;
+    }
+
+    // ----- Item 10 + Item 11 + Item 12 -----
+    Book &operator=(const Book &rhs) // Item 10: returneaza Book&
+    {
+        std::cout << "   [Book] operator=\n";
+
+        // Item 11: autoasignare
         if (this == &rhs)
-            return *this; // Item 11: Self-assignment guard
+        {
+            std::cout << "   [Book] autoasignare - nu fac nimic\n";
+            return *this;
+        }
 
-        int *pOld = data;
-        data = new int(*rhs.data);
-        delete pOld;
+        delete title;
+        title = new std::string(*rhs.title);
+        year = rhs.year; // Item 12: copiem toate campurile
 
-        priority = rhs.priority;
-
-        return *this; // Item 10: Return *this
+        return *this; // Item 10: permite a = b = c
     }
 
-    Widget &operator+=(const Widget &rhs)
+    void print(const std::string &label) const
     {
-        priority += rhs.priority;
-        return *this;
-    }
-
-    int getValue() const { return data ? *data : 0; }
-
-    void print(const std::string &name = "") const
-    {
-        std::cout << "[Widget] " << name << " -> Value: " << (data ? *data : 0)
-                  << ", Priority: " << priority << "\n";
+        std::cout << "   " << label << " -> " << *title << " (" << year << ")\n";
     }
 };
 
+// ===========================================================
 // Item 12: Copy all parts of an object.
+// ===========================================================
 
-class Base
+// Varianta CORECTA
+class EBook : public Book
 {
 private:
-    int baseData;
+    double sizeMb;
 
 public:
-    explicit Base(int v = 0) : baseData(v) {}
-    Base(const Base &rhs) : baseData(rhs.baseData) {}
+    EBook(const std::string &t, int y, double mb)
+        : Book(t, y), sizeMb(mb) {}
 
-    Base &operator=(const Base &rhs)
+    EBook(const EBook &other)
+        : Book(other), sizeMb(other.sizeMb)
     {
-        baseData = rhs.baseData;
+    }
+
+    EBook &operator=(const EBook &rhs)
+    {
+        Book::operator=(rhs); // copiaza partea de baza
+        sizeMb = rhs.sizeMb;
         return *this;
     }
 
-    int getBaseData() const { return baseData; }
-};
-
-class Derived : public Base
-{
-private:
-    int derivedData;
-
-public:
-    Derived(int b, int d) : Base(b), derivedData(d) {}
-
-    Derived(const Derived &rhs)
-        : Base(rhs), derivedData(rhs.derivedData) {}
-
-    Derived &operator=(const Derived &rhs)
+    void printEBook(const std::string &label) const
     {
-        Base::operator=(rhs);
-        derivedData = rhs.derivedData;
-        return *this;
-    }
-
-    int getderivedData() const { return derivedData; }
-
-    void print() const
-    {
-        std::cout << "[Item 12] Derived -> BaseData: " << getBaseData()
-                  << ", DerivedData: " << derivedData << "\n";
+        print(label);
+        std::cout << "      dimensiune: " << sizeMb << " MB\n";
     }
 };
