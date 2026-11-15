@@ -1,0 +1,10 @@
+^C:\USERS\ALEXX\ONEDRIVE\DESKTOP\FOLDERE\AC_CTI\ANUL 4\SEMESTRUL 1\PAOO\TEMA 3\BUILD\CMAKEFILES\C4082EA520D17D90DBE7022A51080D81\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema 3" "-BC:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema 3/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/alexx/OneDrive/Desktop/Foldere/AC_CTI/Anul 4/Semestrul 1/PAOO/Tema 3/build/ResourceManagement.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\alexx\OneDrive\Desktop\Foldere\AC_CTI\Anul 4\Semestrul 1\PAOO\Tema 3\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\alexx\OneDrive\Desktop\Foldere\AC_CTI\Anul 4\Semestrul 1\PAOO\Tema 3\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FA60D29F-34F5-3349-AA0F-7EABADC31E25}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
